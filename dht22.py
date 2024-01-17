@@ -4,8 +4,10 @@
 import time
 import board
 import adafruit_dht
+import urllib2
 
 myAPI = "THINGSPEAK WRITE API_KEY"
+baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI 
 
 # Initial the dht device, with data pin connected to:
 dhtDevice = adafruit_dht.DHT22(board.D4)
@@ -25,14 +27,22 @@ while True:
                 temperature_c, humidity
             )
         )
+        RH = str(round(humidity, 1))
+        T = str(round(temperature, 1))
+        print(RH)
+        print(T)
+        f = urllib2.urlopen(baseURL + 
+                               "&field1=%s&field2=%s" % (RH, T)) 
+        print(f.read()) 
+        f.close() 
 
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(2.0)
+        time.sleep(50)
         continue
     except Exception as error:
         dhtDevice.exit()
         raise error
 
-    time.sleep(2.0)
+    time.sleep(300)
