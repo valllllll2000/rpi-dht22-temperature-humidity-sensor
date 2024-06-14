@@ -12,4 +12,4 @@ Hardware diagram
 <img src="https://github.com/valllllll2000/rpi-dht22-temperature-humidity-sensor/assets/923280/4eb62396-b247-4ce6-a1ea-80a7e29f1075" width="400" />
 
 to run it:
-pgrep -f dht22.py || nohup python3 /home/user/dht22/dht22.py > test.out
+`pgrep -f dht22.py || nohup python3 /home/user/dht22/dht22.py > test.out`
